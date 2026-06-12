@@ -82,12 +82,12 @@
             margin: 5px 0 0 0;
         }
 
-        /* --- Video Grid Layout --- */
+        /* --- SINGLE COLUMN VIDEO LAYOUT --- */
         .video-grid {
             width: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
+            display: flex;
+            flex-direction: column; /* Forces a single column */
+            gap: 20px; /* Increased gap for larger cards */
             margin-top: 20px;
             margin-bottom: 40px;
         }
@@ -95,10 +95,10 @@
         .video-card {
             background-color: var(--bg-card);
             border-radius: 12px;
-            padding: 10px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Slightly deeper shadow for big cards */
             border: 1px solid var(--border-line);
             transition: transform var(--transition-speed), border-color var(--transition-speed);
         }
@@ -112,10 +112,10 @@
         .thumbnail-wrapper {
             width: 100%;
             position: relative;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%; /* 16:9 Aspect Ratio keeps the image huge and cinematic */
             border-radius: 8px;
             overflow: hidden;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             background: linear-gradient(135deg, #222 0%, #111 100%);
             display: flex;
             align-items: center;
@@ -127,19 +127,19 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 24px;
+            font-size: 40px; /* Increased icon size for the larger thumbnail box */
             opacity: 0.6;
         }
 
         /* Source-specific badges */
         .source-badge {
             position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: rgba(20, 20, 20, 0.8);
+            top: 10px;
+            right: 10px;
+            background-color: rgba(20, 20, 20, 0.85);
             border: 1px solid rgba(243, 156, 18, 0.5);
             border-radius: 6px;
-            padding: 3px 6px;
+            padding: 5px 8px;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -149,7 +149,7 @@
 
         .badge-text {
             color: var(--text-main);
-            font-size: 9px;
+            font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
         }
@@ -157,14 +157,14 @@
         .video-info {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
             margin-bottom: 15px;
             flex-grow: 1;
         }
 
         .video-title {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 17px; /* Increased font size for single column */
+            font-weight: 700;
             margin: 0;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -175,7 +175,7 @@
 
         .video-meta {
             color: var(--text-fade);
-            font-size: 11px;
+            font-size: 13px; /* Slightly larger meta text */
             display: flex;
             justify-content: space-between;
         }
@@ -186,9 +186,9 @@
             background-color: var(--button-main);
             color: var(--text-main);
             border: 2px solid transparent;
-            padding: 12px 10px;
+            padding: 14px 10px; /* Taller button for easier tapping */
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -306,7 +306,7 @@
         // Initialize Telegram Web App
         const tg = window.Telegram.WebApp;
         
-        // Updated with your new Bot 2 username
+        // Your Bot 2 Downloader Username
         const BOT2_USERNAME = "video699bot"; 
 
         tg.ready();
@@ -329,7 +329,7 @@
         const gridContainer = document.getElementById('video-grid');
         const gatewayOverlay = document.getElementById('gateway-overlay');
 
-        // Build the premium visual grid interface
+        // Build the premium visual single-column interface
         VIDEOS.forEach(vid => {
             const cardMarkup = `
                 <div class="video-card">
