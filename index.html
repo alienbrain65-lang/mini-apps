@@ -7,23 +7,22 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
-            /* Restored: Rich Deep Charcoal with High-Contrast Amber */
+            /* EXACT colors from your screenshot */
             --bg-deep: #0a0a0a;
             --bg-card: #141414;
             --text-main: #f5f5f5;
             --text-fade: #a1a1a1;
-            --accent-glow: #f39c12; /* Rich Amber */
+            --accent-glow: #f39c12; 
             --accent-hover: #e67e22;
-            --button-main: #252525;
-            --button-hover: #3d3d3d;
+            --button-main: #f39c12; /* Amber Button */
+            --button-text: #000000; /* Black text on button */
             --border-line: #333333;
-            --transition-speed: 0.25s;
         }
 
         body {
             background-color: var(--bg-deep);
             color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -33,7 +32,7 @@
         .app-container {
             width: 100%;
             max-width: 600px;
-            padding: 15px;
+            padding: 20px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -53,16 +52,13 @@
             text-transform: uppercase;
             letter-spacing: 2.5px;
             margin: 0 0 8px 0;
-            background: linear-gradient(90deg, var(--accent-glow), #f1c40f, var(--accent-glow));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: masterGlow 5s linear infinite;
+            color: var(--accent-glow);
         }
 
-        @keyframes masterGlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
+        .app-subtitle {
+            color: var(--text-fade);
+            font-size: 14px;
+            margin: 5px 0 0 0;
         }
 
         .section-heading {
@@ -74,20 +70,16 @@
             margin: 0;
             padding-bottom: 15px;
             border-bottom: 2px solid var(--border-line);
+            width: 100%;
+            text-align: left;
         }
 
-        .app-subtitle {
-            color: var(--text-fade);
-            font-size: 14px;
-            margin: 5px 0 0 0;
-        }
-
-        /* --- THE FIX: SINGLE COLUMN VIDEO FEED --- */
-        .video-grid {
+        /* --- SINGLE COLUMN FEED --- */
+        .video-feed-container {
             width: 100%;
             display: flex;
-            flex-direction: column; /* Forces everything into one massive column */
-            gap: 25px; /* Added more space between the big cards */
+            flex-direction: column; /* This guarantees a single vertical column */
+            gap: 25px; 
             margin-top: 20px;
             margin-bottom: 40px;
         }
@@ -95,20 +87,14 @@
         .video-card {
             background-color: var(--bg-card);
             border-radius: 12px;
-            padding: 12px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
             border: 1px solid var(--border-line);
-            transition: transform var(--transition-speed), border-color var(--transition-speed);
         }
 
-        .video-card:active, .video-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-glow);
-        }
-
-        /* Thumbnail Wrapper - Keeps it Huge and 16:9 */
+        /* Huge 16:9 Edge-to-Edge Thumbnail */
         .thumbnail-wrapper {
             width: 100%;
             position: relative;
@@ -127,7 +113,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 36px;
+            font-size: 40px;
             opacity: 0.6;
         }
 
@@ -135,20 +121,19 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: rgba(20, 20, 20, 0.85);
-            border: 1px solid rgba(243, 156, 18, 0.5);
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 1px solid var(--accent-glow);
             border-radius: 6px;
-            padding: 4px 8px;
+            padding: 5px 10px;
             display: flex;
             align-items: center;
-            gap: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            gap: 5px;
             z-index: 2;
         }
 
         .badge-text {
             color: var(--text-main);
-            font-size: 10px;
+            font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
         }
@@ -156,60 +141,42 @@
         .video-info {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            margin-bottom: 15px;
-            flex-grow: 1;
+            gap: 8px;
+            margin-bottom: 18px;
         }
 
         .video-title {
-            font-size: 16px;
+            font-size: 18px; /* Larger font for single feed */
             font-weight: 700;
             margin: 0;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
             line-height: 1.4;
         }
 
         .video-meta {
             color: var(--text-fade);
-            font-size: 12px;
+            font-size: 13px;
             display: flex;
             justify-content: space-between;
         }
 
-        /* --- Restored Premium Amber Button --- */
+        /* --- Big Amber Button --- */
         .btn-cta {
             width: 100%;
             background-color: var(--button-main);
-            color: var(--text-main);
-            border: 2px solid transparent;
-            padding: 14px 10px;
+            color: var(--button-text);
+            border: none;
+            padding: 16px 10px; /* Taller button */
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            transition: background-color var(--transition-speed), border-color var(--transition-speed), transform 0.1s;
+            transition: transform 0.1s, background-color 0.2s;
         }
 
         .btn-cta:active {
             transform: scale(0.97);
-            background-color: var(--button-hover);
-        }
-
-        .btn-cta-premium {
-            background-color: var(--accent-glow);
-            color: #000000;
-        }
-
-        .btn-cta-premium:active {
             background-color: var(--accent-hover);
         }
 
@@ -228,7 +195,7 @@
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s;
+            transition: opacity 0.3s;
         }
 
         .gateway-overlay.show {
@@ -238,7 +205,7 @@
 
         .gateway-title {
             color: var(--accent-glow);
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             text-transform: uppercase;
             margin: 0 0 10px 0;
@@ -246,13 +213,13 @@
 
         .gateway-text {
             color: var(--text-main);
-            font-size: 14px;
+            font-size: 15px;
             margin: 0 0 25px 0;
         }
 
         .loading-spinner {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border: 4px solid var(--border-line);
             border-top: 4px solid var(--accent-glow);
             border-radius: 50%;
@@ -267,11 +234,11 @@
         .utility-box {
             text-align: center;
             color: var(--text-fade);
-            font-size: 11px;
+            font-size: 12px;
             margin-top: 20px;
             width: 100%;
             border-top: 1px solid var(--border-line);
-            padding-top: 10px;
+            padding-top: 15px;
         }
     </style>
 </head>
@@ -284,11 +251,11 @@
             <p class="app-subtitle">Official Cloud Library Gateway</p>
         </header>
 
-        <section style="width: 100%;">
+        <div style="width: 100%;">
             <h2 class="section-heading">LATEST VIDEOS</h2>
-        </section>
+        </div>
 
-        <div id="video-grid" class="video-grid"></div>
+        <div id="video-feed" class="video-feed-container"></div>
 
         <footer class="utility-box">
             Media Network Hub | Live Premium Streams
@@ -296,7 +263,7 @@
     </div>
 
     <div id="gateway-overlay" class="gateway-overlay">
-        <h3 class="gateway-title">Secure Video Gateway</h3>
+        <h3 class="gateway-title">Secure Gateway</h3>
         <p class="gateway-text">Verifying secure database mirror...</p>
         <div class="loading-spinner"></div>
     </div>
@@ -304,25 +271,20 @@
     <script>
         const tg = window.Telegram.WebApp;
         
-        // Your correct downloader bot
+        // Downloader Bot Link
         const BOT2_USERNAME = "video699bot"; 
 
         tg.ready();
         tg.expand();
 
-        if (tg.themeParams && tg.themeParams.bg_color) {
-            document.body.style.backgroundColor = tg.themeParams.bg_color;
-            document.body.style.color = tg.themeParams.text_color || '#f5f5f5';
-        }
-
         const VIDEOS = [
-            { id: 'v1', title: 'Trending Action Drop Movie 01', size: '1.2 GB', duration: '1h 45m', source: 'terabox', sourceIcon: '🌐', rawUrl: 'https://terabox.com/s/1example_link_A' },
-            { id: 'v2', title: 'Exclusive Full Series Episode (S01E01)', size: '450 MB', duration: '45m', source: 'diskwala', sourceIcon: '📂', rawUrl: 'https://diskwala.com/f/2example_link_B' },
-            { id: 'v3', title: 'Premium Multi-Audio Hollywood Feature', size: '2.1 GB', duration: '2h 15m', source: 'terabox', sourceIcon: '🌐', rawUrl: 'https://terabox.com/s/3example_link_C' },
-            { id: 'v4', title: 'New Anime Special Release [1080p Ultra]', size: '350 MB', duration: '24m', source: 'diskwala', sourceIcon: '📂', rawUrl: 'https://diskwala.com/f/4example_link_D' }
+            { id: 'v1', title: 'Trending Action Drop Movie 01', size: '1.2 GB', duration: '1h 45m', source: 'TERABOX', sourceIcon: '🌐', rawUrl: 'https://terabox.com/s/1example_link_A' },
+            { id: 'v2', title: 'Exclusive Full Series Episode (S01E01)', size: '450 MB', duration: '45m', source: 'DISKWALA', sourceIcon: '📂', rawUrl: 'https://diskwala.com/f/2example_link_B' },
+            { id: 'v3', title: 'Premium Multi-Audio Hollywood Feature', size: '2.1 GB', duration: '2h 15m', source: 'TERABOX', sourceIcon: '🌐', rawUrl: 'https://terabox.com/s/3example_link_C' },
+            { id: 'v4', title: 'New Anime Special Release [1080p Ultra]', size: '350 MB', duration: '24m', source: 'DISKWALA', sourceIcon: '📂', rawUrl: 'https://diskwala.com/f/4example_link_D' }
         ];
 
-        const gridContainer = document.getElementById('video-grid');
+        const feedContainer = document.getElementById('video-feed');
         const gatewayOverlay = document.getElementById('gateway-overlay');
 
         VIDEOS.forEach(vid => {
@@ -343,12 +305,12 @@
                         </div>
                     </div>
                     
-                    <button class="btn-cta btn-cta-premium" onclick="handleSecureWatch('${vid.rawUrl}')">
-                        Watch / Download
+                    <button class="btn-cta" onclick="handleSecureWatch('${vid.rawUrl}')">
+                        WATCH / DOWNLOAD
                     </button>
                 </div>
             `;
-            gridContainer.insertAdjacentHTML('beforeend', cardMarkup);
+            feedContainer.insertAdjacentHTML('beforeend', cardMarkup);
         });
 
         function encodeUrl(url) {
